@@ -20,12 +20,4 @@ object Logo {
   def left(pos: Position, l: Degree): Free[Instruction, Position] = Free.liftF(RotateLeft(pos, l))
   def right(pos: Position, l: Degree): Free[Instruction, Position] = Free.liftF(RotateRight(pos, l))
   def showPosition(pos: Position): Free[Instruction, Unit] = Free.liftF(ShowPosition(pos))
-
-  val program: (Position => Free[Instruction, Position]) = (start: Position) => {
-    for {
-      p1 <- forward(start, 10)
-      p2 <- right(p1, Degree(90))
-      p3 <- forward(p2, 10)
-    } yield p3
-  }
 }
